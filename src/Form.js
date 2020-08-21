@@ -2,91 +2,224 @@ import React from "react";
 import { Route, Switch, Link } from "react-router-dom";
 import Conformation from "./Confirmation";
 
-const Form = () => {
+const Form = (props) => {
+  const { dataInput, submit, disable, resetForm, checkBox, value } = props;
+
+  const onInputChange = (evt) => {
+    const { name, value } = evt.target;
+    dataInput(name, value);
+  };
+
+  const onSubmit = (evt) => {
+    evt.preventDefault();
+    submit();
+  };
+
+  const onCheckBox = (evt) => {
+    const { name, checked } = evt.target;
+    checkBox(name, checked);
+  };
   return (
     <div className="Header">
-      <form>
+      <form onSubmit={onSubmit}>
         <h3>Choose Size</h3>
-        <select>
-          <option>--Choose Your Size--</option>
-          <option>--Small--</option>
-          <option>--Medium--</option>
-          <option>--Large--</option>
-          <option>--Extra-Large--</option>
+        <select onChange={onInputChange} value={value.size} name="size">
+          <option value="">--Choose Your Size--</option>
+          <option value="small">--Small--</option>
+          <option value="medium">--Medium--</option>
+          <option value="large">--Large--</option>
+          <option value="extraLarge">--Extra-Large--</option>
         </select>
+        <h3>Choose Sauce</h3>
         <label>
-          {" "}
-          <h3>Choose Sauce</h3>
-          <input type="radio" />
-          <label>Original Red</label>
-          <input type="radio" />
-          <label>Garlic Ranch</label>
-          <input type="radio" />
-          <label>BBQ Sauce</label>
-          <input type="radio" />
-          <label>Spinach Alfredo</label>
+          <input
+            type="radio"
+            name="sauce"
+            onChange={onInputChange}
+            checked={value.sauce === "originalRed"}
+            value="originalRed"
+          />
+          Original Red
         </label>
-        <h3>Add Topings</h3>
         <label>
-          <input type="checkbox"></input>
+          <input
+            type="radio"
+            name="sauce"
+            onChange={onInputChange}
+            checked={value.sauce === "garlicRanch"}
+            value="garlicRanch"
+          />
+          Garlic Ranch
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="sauce"
+            onChange={onInputChange}
+            checked={value.sauce === "bbqSauce"}
+            value="bbqSauce"
+          />
+          BBQ Sauce
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="sauce"
+            onChange={onInputChange}
+            checked={value.sauce === "spinachAlfredo"}
+            value="spinachAlfredo"
+          />
+          Spinach Alfredo
+        </label>
+
+        <h3>Add Topings</h3>
+
+        <label>
+          <input
+            type="checkbox"
+            name="peppercorn"
+            checked={value.toppings.peppercorn}
+            onChange={onCheckBox}
+          />
           Peppercorn
         </label>
+
         <label>
-          <input type="checkbox"></input>
+          <input
+            type="checkbox"
+            name="sausage"
+            checked={value.toppings.sausage}
+            onChange={onCheckBox}
+          />
           Sausage
         </label>
+
         <label>
-          <input type="checkbox"></input>
+          <input
+            type="checkbox"
+            name="canadianBacon"
+            onChange={onCheckBox}
+            checked={value.toppings.canadianBacon}
+          />
           Canadian Bacon
         </label>
+
         <label>
-          <input type="checkbox"></input>
+          <input
+            type="checkbox"
+            name="spiceyItalianSausage"
+            onChange={onCheckBox}
+            checked={value.toppings.spiceyItalianSausage}
+          />
           Spicey Italian Sausage
         </label>
+
         <label>
-          <input type="checkbox"></input>
+          <input
+            type="checkbox"
+            name="garlicChicken"
+            onChange={onCheckBox}
+            checked={value.toppings.garlicChicken}
+          />
           Garlic Chicken
         </label>
+
         <label>
-          <input type="checkbox"></input>
+          <input
+            type="checkbox"
+            name="onions"
+            onChange={onCheckBox}
+            checked={value.toppings.onions}
+          />
           Onions
         </label>
+
         <label>
-          <input type="checkbox"></input>
+          <input
+            type="checkbox"
+            name="greenPepper"
+            onChange={onCheckBox}
+            checked={value.toppings.greenPepper}
+          />
           Green Pepper
         </label>
+
         <label>
-          <input type="checkbox"></input>
+          <input
+            type="checkbox"
+            name="dicedTomatos"
+            onChange={onCheckBox}
+            checked={value.toppings.dicedTomatos}
+          />
           Diced Tomatos
         </label>
+
         <label>
-          <input type="checkbox"></input>
+          <input
+            type="checkbox"
+            name="blackOlives"
+            onChange={onCheckBox}
+            checked={value.toppings.blackOlives}
+          />
           Black Olives
         </label>
+
         <label>
-          <input type="checkbox"></input>
-          artichoke Hearts
+          <input
+            type="checkbox"
+            name="artichokeHearts"
+            onChange={onCheckBox}
+            checked={value.toppings.artichokeHearts}
+          />
+          Artichoke Hearts
         </label>
+
         <label>
-          <input type="checkbox"></input>
+          <input
+            type="checkbox"
+            name="threCheese"
+            onChange={onCheckBox}
+            checked={value.toppings.threCheese}
+          />
           Three Cheese
         </label>
+
         <label>
-          <input type="checkbox"></input>
+          <input
+            type="checkbox"
+            name="pineapple"
+            onChange={onCheckBox}
+            checked={value.toppings.pineapple}
+          />
           Pineapple
         </label>
+
         <label>
-          <input type="checkbox"></input>
+          <input
+            type="checkbox"
+            name="extraCheese"
+            onChange={onCheckBox}
+            checked={value.toppings.extraCheese}
+          />
           Extra Cheese
-        </label><br/>
+        </label>
+
+        <br />
         <label>
           Name On Order
-          <input type="text"></input>
-        </label><br/>
+          <input
+            type="text"
+            name="name"
+            placeholder="Order Name"
+            value=""
+            onChange={onInputChange}
+          />
+        </label>
+        <br />
 
-        <Link to="/conformation">Submit</Link>
+        <Link to="/orderConformation">Submit</Link>
         <Switch>
-          <Route path="/conformation">
+          <Route path="/orderConformation">
             <Conformation />
           </Route>
         </Switch>
