@@ -3,7 +3,7 @@ import { Route, Switch, Link } from "react-router-dom";
 import Conformation from "./Confirmation";
 
 const Form = (props) => {
-  const { dataInput, submit, disable, checkBox, value,errors } = props;
+  const { dataInput, submit, disable, checkBox, value, errors } = props;
 
   const onInputChange = (evt) => {
     const { name, value } = evt.target;
@@ -19,31 +19,43 @@ const Form = (props) => {
     const { name, checked } = evt.target;
     checkBox(name, checked);
   };
+  
   return (
     <div className="Header">
       <form onSubmit={onSubmit}>
-
-      <div className="errors">
-            <div className="errorName">{errors.name}</div>
-            <div className="errorSize">{errors.size}</div>
-            <div className="errorSauce">{errors.sauce}</div>
-            <div className="instructions">{errors.instructions}</div>
-          </div>
-
+        <div className="errors">
+          <div className="errorName">{errors.name}</div>
+          <div className="errorSize">{errors.size}</div>
+          <div className="errorSauce">{errors.sauce}</div>
+          <div className="instructions">{errors.instructions}</div>
+        </div>
         <h3>Choose Size</h3>
-
-
-
-        <select onChange={onInputChange} value={value.size} name="size">
-          <option value="">--Choose Your Size--</option>
-          <option value="small">--Small--</option>
-          <option value="medium">--Medium--</option>
-          <option value="large">--Large--</option>
-          <option value="extraLarge">--Extra-Large--</option>
+        <select
+          className="size"
+          onChange={onInputChange}
+          value={value.size}
+          name="size"
+        >
+          <option className="size" value="">
+            --Choose Your Size--
+          </option>
+          <option className="sizeS" value="small">
+            --Small--
+          </option>
+          <option className="sizeM" value="medium">
+            --Medium--
+          </option>
+          <option className="sizeL" value="large">
+            --Large--
+          </option>
+          <option className="sizeXL" value="extraLarge">
+            --Extra-Large--
+          </option>
         </select>
         <h3>Choose Sauce</h3>
         <label>
           <input
+            className="firstSauce"
             type="radio"
             name="sauce"
             onChange={onInputChange}
@@ -54,6 +66,7 @@ const Form = (props) => {
         </label>
         <label>
           <input
+            className="secondSauce"
             type="radio"
             name="sauce"
             onChange={onInputChange}
@@ -64,6 +77,7 @@ const Form = (props) => {
         </label>
         <label>
           <input
+            className="thirdSauce"
             type="radio"
             name="sauce"
             onChange={onInputChange}
@@ -74,6 +88,7 @@ const Form = (props) => {
         </label>
         <label>
           <input
+          className='fourthSauce'
             type="radio"
             name="sauce"
             onChange={onInputChange}
@@ -81,10 +96,11 @@ const Form = (props) => {
             value="spinachAlfredo"
           />
           Spinach Alfredo
-        </label>
+        </label >
         <h3>Add Topings</h3>
         <label>
           <input
+          className="topping1"
             type="checkbox"
             name="peppercorn"
             checked={value.toppings.peppercorn}
@@ -94,6 +110,7 @@ const Form = (props) => {
         </label>
         <label>
           <input
+          className="topping2"
             type="checkbox"
             name="sausage"
             checked={value.toppings.sausage}
@@ -103,6 +120,7 @@ const Form = (props) => {
         </label>
         <label>
           <input
+          className="topping3"
             type="checkbox"
             name="canadianBacon"
             onChange={onCheckBox}
@@ -112,6 +130,7 @@ const Form = (props) => {
         </label>
         <label>
           <input
+          className="topping4"
             type="checkbox"
             name="spiceyItalianSausage"
             onChange={onCheckBox}
@@ -121,6 +140,7 @@ const Form = (props) => {
         </label>
         <label>
           <input
+          className="topping5"
             type="checkbox"
             name="garlicChicken"
             onChange={onCheckBox}
@@ -130,6 +150,7 @@ const Form = (props) => {
         </label>
         <label>
           <input
+          className="topping6"
             type="checkbox"
             name="onions"
             onChange={onCheckBox}
@@ -139,6 +160,7 @@ const Form = (props) => {
         </label>
         <label>
           <input
+          className="topping7"
             type="checkbox"
             name="greenPepper"
             onChange={onCheckBox}
@@ -148,6 +170,7 @@ const Form = (props) => {
         </label>
         <label>
           <input
+          className="topping8"
             type="checkbox"
             name="dicedTomatos"
             onChange={onCheckBox}
@@ -157,6 +180,7 @@ const Form = (props) => {
         </label>
         <label>
           <input
+          className="topping9"
             type="checkbox"
             name="blackOlives"
             onChange={onCheckBox}
@@ -166,6 +190,7 @@ const Form = (props) => {
         </label>
         <label>
           <input
+          className="topping10"
             type="checkbox"
             name="artichokeHearts"
             onChange={onCheckBox}
@@ -175,6 +200,7 @@ const Form = (props) => {
         </label>
         <label>
           <input
+          className="topping11"
             type="checkbox"
             name="threCheese"
             onChange={onCheckBox}
@@ -184,6 +210,7 @@ const Form = (props) => {
         </label>
         <label>
           <input
+          className="topping12"
             type="checkbox"
             name="pineapple"
             onChange={onCheckBox}
@@ -193,6 +220,7 @@ const Form = (props) => {
         </label>
         <label>
           <input
+          className="topping13"
             type="checkbox"
             name="extraCheese"
             onChange={onCheckBox}
@@ -213,7 +241,7 @@ const Form = (props) => {
         </label>
         <br />{" "}
         <label>
-         Special Instructions&nbsp;
+          Special Instructions&nbsp;
           <input
             type="text"
             name="instructions"
@@ -223,7 +251,7 @@ const Form = (props) => {
           />
         </label>
         <br />
-        <button>Submit</button>
+        <button >Submit</button>
         <Link to="/orderConformation"></Link>
         <Switch>
           <Route path="/orderConformation">

@@ -17,7 +17,7 @@ console.log(order)
     <h2>Recent order</h2>
   <p>{order.size}</p>
   <p>{order.sauce}</p>
-  <p>{order.toppings}</p>
+  <p>{order.toppings} </p>
 </div>
   );
 };

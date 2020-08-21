@@ -110,7 +110,7 @@ const App = () => {
       <div>
         <h1>Lambda Craft Pizza</h1>
         <Link to="/">Home</Link>
-        <Link to="/pizza">Order</Link>
+        <Link className='orderForm' to="/pizza">Order</Link>
       </div>
       <div>
         <Link to='/recentOrders'>Recent Orders</Link>
