@@ -3,7 +3,7 @@ import { Route, Switch, Link } from "react-router-dom";
 import Conformation from "./Confirmation";
 
 const Form = (props) => {
-  const { dataInput, submit, disable, resetForm, checkBox, value } = props;
+  const { dataInput, submit, disable, checkBox, value,errors } = props;
 
   const onInputChange = (evt) => {
     const { name, value } = evt.target;
@@ -22,7 +22,18 @@ const Form = (props) => {
   return (
     <div className="Header">
       <form onSubmit={onSubmit}>
+
+      <div className="errors">
+            <div className="errorName">{errors.name}</div>
+            <div className="errorSize">{errors.size}</div>
+            <div className="errorSauce">{errors.sauce}</div>
+            <div className="instructions">{errors.instructions}</div>
+          </div>
+
         <h3>Choose Size</h3>
+
+
+
         <select onChange={onInputChange} value={value.size} name="size">
           <option value="">--Choose Your Size--</option>
           <option value="small">--Small--</option>
@@ -71,9 +82,7 @@ const Form = (props) => {
           />
           Spinach Alfredo
         </label>
-
         <h3>Add Topings</h3>
-
         <label>
           <input
             type="checkbox"
@@ -83,7 +92,6 @@ const Form = (props) => {
           />
           Peppercorn
         </label>
-
         <label>
           <input
             type="checkbox"
@@ -93,7 +101,6 @@ const Form = (props) => {
           />
           Sausage
         </label>
-
         <label>
           <input
             type="checkbox"
@@ -103,7 +110,6 @@ const Form = (props) => {
           />
           Canadian Bacon
         </label>
-
         <label>
           <input
             type="checkbox"
@@ -113,7 +119,6 @@ const Form = (props) => {
           />
           Spicey Italian Sausage
         </label>
-
         <label>
           <input
             type="checkbox"
@@ -123,7 +128,6 @@ const Form = (props) => {
           />
           Garlic Chicken
         </label>
-
         <label>
           <input
             type="checkbox"
@@ -133,7 +137,6 @@ const Form = (props) => {
           />
           Onions
         </label>
-
         <label>
           <input
             type="checkbox"
@@ -143,7 +146,6 @@ const Form = (props) => {
           />
           Green Pepper
         </label>
-
         <label>
           <input
             type="checkbox"
@@ -153,7 +155,6 @@ const Form = (props) => {
           />
           Diced Tomatos
         </label>
-
         <label>
           <input
             type="checkbox"
@@ -163,7 +164,6 @@ const Form = (props) => {
           />
           Black Olives
         </label>
-
         <label>
           <input
             type="checkbox"
@@ -173,7 +173,6 @@ const Form = (props) => {
           />
           Artichoke Hearts
         </label>
-
         <label>
           <input
             type="checkbox"
@@ -183,7 +182,6 @@ const Form = (props) => {
           />
           Three Cheese
         </label>
-
         <label>
           <input
             type="checkbox"
@@ -193,7 +191,6 @@ const Form = (props) => {
           />
           Pineapple
         </label>
-
         <label>
           <input
             type="checkbox"
@@ -203,21 +200,31 @@ const Form = (props) => {
           />
           Extra Cheese
         </label>
-
         <br />
         <label>
-          Name On Order
+          Name On Order&nbsp;
           <input
             type="text"
             name="name"
             placeholder="Order Name"
-            value=""
+            value={value.name}
+            onChange={onInputChange}
+          />
+        </label>
+        <br />{" "}
+        <label>
+         Special Instructions&nbsp;
+          <input
+            type="text"
+            name="instructions"
+            placeholder="instructions"
+            value={value.instructions}
             onChange={onInputChange}
           />
         </label>
         <br />
-
-        <Link to="/orderConformation">Submit</Link>
+        <button>Submit</button>
+        <Link to="/orderConformation"></Link>
         <Switch>
           <Route path="/orderConformation">
             <Conformation />
