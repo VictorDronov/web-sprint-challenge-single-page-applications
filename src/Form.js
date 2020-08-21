@@ -1,6 +1,6 @@
 import React from "react";
-import { Route, Switch, Link } from "react-router-dom";
-import Conformation from "./Confirmation";
+import {Route, Switch, Link,Redirect } from "react-router-dom";
+import Confirmation from "./Confirmation";
 
 const Form = (props) => {
   const { dataInput, submit, disable, checkBox, value, errors } = props;
@@ -12,7 +12,7 @@ const Form = (props) => {
 
   const onSubmit = (evt) => {
     evt.preventDefault();
-    submit();
+    submit()
   };
 
   const onCheckBox = (evt) => {
@@ -20,9 +20,14 @@ const Form = (props) => {
     checkBox(name, checked);
   };
   
+const afterClickTakeMe = (evt)=>{
+    evt.preventDefault()
+    return <Link to='/Confirmation'>Submit</Link>
+
+}
   return (
     <div className="Header">
-      <form onSubmit={onSubmit}>
+      <form  onSubmit={onSubmit} >
         <div className="errors">
           <div className="errorName">{errors.name}</div>
           <div className="errorSize">{errors.size}</div>
@@ -251,11 +256,10 @@ const Form = (props) => {
           />
         </label>
         <br />
-        <button >Submit</button>
-        <Link to="/orderConformation"></Link>
+        <button disabled={disable} >Submit</button>
         <Switch>
-          <Route path="/orderConformation">
-            <Conformation />
+          <Route path="/Confirmation">
+            <Confirmation />
           </Route>
         </Switch>
       </form>

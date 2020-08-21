@@ -9,7 +9,6 @@ const formSchema = yup.object().shape({
     .string()
     .max(20,"can not exceed 20 characters"),
   size: yup.string().required("Must choose a size."),
-  toppings: yup.boolean().oneOf([true], "Can not choose more than 4 topings"),
   sauce: yup.string().required("choose a sauce")
 });
 

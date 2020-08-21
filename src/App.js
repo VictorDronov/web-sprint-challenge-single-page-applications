@@ -5,7 +5,7 @@ import Confirmation from "./Confirmation";
 import axios from "axios";
 import * as yup from "yup";
 import formSchema from "./formSchema";
-import RecentOrder from './RecentOrder'
+import RecentOrder from "./RecentOrder";
 
 const initialFormValues = {
   size: "",
@@ -16,7 +16,8 @@ const initialFormValues = {
     canadianBacon: false,
     spiceyItalianSausage: false,
     garlicChicken: false,
-    onionsGreenPepper: false,
+    onions: false,
+    greenPepper: false,
     dicedTomatos: false,
     blackOlives: false,
     artichokeHearts: false,
@@ -30,18 +31,18 @@ const initialFormValues = {
 const initialDisabled = true;
 const initialOrder = [];
 const initialFormErrors = {
-  name: '',
-  size: '',
-  sauce: '',
+  name: "",
+  size: "",
+  sauce: "",
   instructions: "",
-}
+};
 
 const App = () => {
   const [order, setOrder] = useState(initialOrder);
   const [formValues, setFormValues] = useState(initialFormValues);
   const [disabled, setDisabled] = useState(initialDisabled);
-  const [formErrors, setFormErrors] = useState(initialFormErrors)
-  const [recentOrder, setRecentOrder] = useState(initialOrder)
+  const [formErrors, setFormErrors] = useState(initialFormErrors);
+  const [recentOrder, setRecentOrder] = useState(initialOrder);
 
   const postNewOrder = (newOrder) => {
     axios
@@ -63,11 +64,13 @@ const App = () => {
       size: formValues.size,
       sauce: formValues.sauce,
       instructions: formValues.instructions.trim(),
-      toppings: Object.keys(formValues.toppings).filter(item => formValues.toppings[item])
+      toppings: Object.keys(formValues.toppings).filter(
+        (item) => formValues.toppings[item]
+      ),
     };
     console.log(newOrder)
     postNewOrder(newOrder);
-    setRecentOrder(newOrder)
+    setRecentOrder(newOrder);
   };
 
   const resetForm = () => setFormValues(initialFormValues);
@@ -78,8 +81,8 @@ const App = () => {
       toppings: { ...formValues.toppings, [name]: ischecked },
     });
   };
-  const dataInput = (name, data) => {
 
+  const dataInput = (name, data) => {
     yup
       .reach(formSchema, name)
       //we can then run validate using the value
@@ -105,15 +108,24 @@ const App = () => {
       [name]: data,
     });
   };
+
+  useEffect(() => {
+    formSchema.isValid(formValues).then((valid) => {
+      setDisabled(!valid);
+    });
+  }, [formValues]);
+
   return (
     <div className="Header">
       <div>
         <h1>Lambda Craft Pizza</h1>
         <Link to="/">Home</Link>
-        <Link className='orderForm' to="/pizza">Order</Link>
+        <Link className="orderForm" to="/pizza">
+          Order
+        </Link>
       </div>
       <div>
-        <Link to='/recentOrders'>Recent Orders</Link>
+        <Link to="/recentOrders">Recent Orders</Link>
       </div>
       <Switch>
         <Route path="/pizza">
@@ -129,6 +141,9 @@ const App = () => {
         </Route>
         <Route path="/recentOrders">
           <RecentOrder order={recentOrder} />
+        </Route>
+        <Route path="/Confirmation">
+          <Confirmation />
         </Route>
       </Switch>
       <div className="topSection"></div>
